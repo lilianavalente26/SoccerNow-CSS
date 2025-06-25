@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane fitToWidth="true" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="pt.ul.fc.css.soccernow.presentation.control.match.MatchResultController">
+    <content>
+        <VBox spacing="20" alignment="CENTER" style="-fx-padding: 30;">
+            <Label text="Register Match Result" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+
+            <GridPane hgap="10" vgap="10">
+                <Label text="Match ID:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <TextField fx:id="matchIdField" editable="false" 
+                           style="-fx-background-color: #f5f5f5; -fx-opacity: 1; -fx-text-fill: black;"
+                           GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                <Label text="Player Goals (ID,ID,...):" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <TextField fx:id="playerGoalsField" promptText="Use ',' between IDs" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                <Label text="Yellow Cards (ID,ID,...):" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <TextField fx:id="yellowCardsField" promptText="Use ',' between IDs" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                <Label text="Red Cards (ID,ID,...):" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                <TextField fx:id="redCardsField" promptText="Use ',' between IDs" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+            </GridPane>
+
+            <Label fx:id="generalError" style="-fx-text-fill: red;" visible="false" />
+            <Label fx:id="playerGoalsError" style="-fx-text-fill: red;" visible="false" />
+            <Label fx:id="yellowCardsError" style="-fx-text-fill: red;" visible="false" />
+            <Label fx:id="redCardsError" style="-fx-text-fill: red;" visible="false" />
+
+            <HBox spacing="10" alignment="CENTER">
+                <Button text="Finish Match" onAction="#finishMatch" style="-fx-font-weight: bold;" />
+                <Button text="Cancel" onAction="#cancel" />
+            </HBox>
+        </VBox>
+    </content>
+</ScrollPane>

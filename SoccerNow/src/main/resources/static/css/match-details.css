@@ -1,0 +1,160 @@
+/* Basic */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    color: #333;
+}
+
+header {
+    background: #2c3e50;
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+.nav-button {
+    color: white;
+    background: #3498db;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.nav-button:hover {
+    background: #2980b9;
+}
+
+/* Match */
+.match-info {
+    background: white;
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.team-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 1rem;
+}
+
+.team-info h2 {
+    margin: 0;
+}
+
+.score {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.match-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+}
+
+/* Sections */
+.sections-container {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem;
+}
+
+.section {
+    flex: 1;
+    background: white;
+    padding: 1rem;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.section h3 {
+    margin-top: 0;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.5rem;
+}
+
+.section h4 {
+    margin-bottom: 0.5rem;
+}
+
+ul {
+    padding-left: 1.2rem;
+    margin: 0.5rem 0;
+}
+
+/* Form */
+.event-form {
+    background: white;
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: bold;
+}
+
+.form-group select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.action-button {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.action-button:hover {
+    background: #2980b9;
+}
+
+.finish-match {
+    text-align: center;
+    margin: 1rem;
+}
+
+/* Footer */
+footer {
+    background: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sections-container {
+        flex-direction: column;
+    }
+    
+    .match-details {
+        grid-template-columns: 1fr;
+    }
+}

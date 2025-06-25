@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="pt.ul.fc.css.soccernow.presentation.control.player.PlayerRegistrationController">
+
+    <ScrollPane fitToWidth="true" fitToHeight="true" pannable="true">
+        <VBox spacing="15" alignment="CENTER" style="-fx-padding: 30;">
+            <Label text="Register New Player" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+
+            <GridPane hgap="10" vgap="10" alignment="CENTER">
+                <Label text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <TextField fx:id="nameField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                <Label fx:id="nameError" text="Name is required" style="-fx-text-fill: red;" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                <Label text="Preferred Position:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                <ComboBox fx:id="positionComboBox" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                <Label fx:id="positionError" text="Preferred Position is required" style="-fx-text-fill: red;" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+                <Label text="Teams (comma separated IDs):" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                <TextField fx:id="teamsField" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                <Label fx:id="teamsError" text="" style="-fx-text-fill: red;" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+            </GridPane>
+
+            <HBox spacing="10" alignment="CENTER">
+                <Button text="Register" onAction="#registerPlayer" style="-fx-font-weight: bold;"/>
+                <Button text="Cancel" onAction="#cancelRegistration"/>
+            </HBox>
+        </VBox>
+    </ScrollPane>
+</StackPane>

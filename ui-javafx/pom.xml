@@ -1,0 +1,118 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>pt.ul.fc.css</groupId>
+    <artifactId>ui-javafx</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    
+	<properties>
+	    <javafx.version>17.0.7</javafx.version>
+	    <spring.version>6.0.11</spring.version>
+	    <jackson.version>2.15.2</jackson.version>
+	</properties>
+    
+	<dependencies>
+	    <!-- JavaFX Modules -->
+	    <dependency>
+	        <groupId>org.openjfx</groupId>
+	        <artifactId>javafx-controls</artifactId>
+	        <version>${javafx.version}</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.openjfx</groupId>
+	        <artifactId>javafx-fxml</artifactId>
+	        <version>${javafx.version}</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.openjfx</groupId>
+	        <artifactId>javafx-web</artifactId>
+	        <version>${javafx.version}</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.openjfx</groupId>
+	        <artifactId>javafx-graphics</artifactId>
+	        <version>${javafx.version}</version>
+	    </dependency>
+	
+	    <!-- Spring Framework -->
+	    <dependency>
+	        <groupId>org.springframework</groupId>
+	        <artifactId>spring-web</artifactId>
+	        <version>${spring.version}</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.springframework</groupId>
+	        <artifactId>spring-core</artifactId>
+	        <version>${spring.version}</version>
+	    </dependency>
+	
+	    <!-- Jackson for JSON processing -->
+	    <dependency>
+	        <groupId>com.fasterxml.jackson.core</groupId>
+	        <artifactId>jackson-databind</artifactId>
+	        <version>${jackson.version}</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>com.fasterxml.jackson.core</groupId>
+	        <artifactId>jackson-annotations</artifactId>
+        <version>${jackson.version}</version>
+    </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.14.2</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+                <configuration>
+                    <release>17</release>
+                    <source>17</source>
+                    <target>17</target>
+                </configuration>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.8</version>
+                <executions>
+                    <execution>
+                        <id>default-cli</id>
+                        <configuration>
+                            <mainClass>pt.ul.fc.css.soccernow.SoccerNowMain</mainClass>
+                            <module>pt.ul.fc.css.soccernow</module>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <mainClass>pt.ul.fc.css.soccernow.SoccerNowMain</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+        
+		<resources>
+		    <resource>
+		        <directory>src/main/resources</directory>
+		        <filtering>false</filtering>
+		        <includes>
+		            <include>**/*.fxml</include>
+		            <include>**/*.properties</include>
+		            <include>**/*.css</include>
+		        </includes>
+		    </resource>
+		</resources>
+    </build>
+</project>

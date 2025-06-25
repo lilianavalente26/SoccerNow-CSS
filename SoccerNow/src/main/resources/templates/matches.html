@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Matches</title>
+    <link rel="stylesheet" href="/css/matches.css" />
+</head>
+<body>
+    <header>
+        <h1>Matches</h1>
+        <nav>
+            <a href="/" class="nav-button">Home</a>
+        </nav>
+    </header>
+
+    <form action="/matches/filter-by/result" method="get" id="filterForm">
+        <div class="filter-row">
+            <div class="filter-group">
+                <label for="isOver">Match Finished:</label>
+                <select name="isOver" id="isOver">
+                    <option value="" selected="selected">-- Any --</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="minGoals">Min Goals:</label>
+                <input type="number" name="minGoals" id="minGoals" min="0" value="">
+            </div>
+
+            <div class="filter-group">
+                <label for="maxGoals">Max Goals:</label>
+                <input type="number" name="maxGoals" id="maxGoals" min="0" value="">
+            </div>
+        </div>
+
+        <div class="filter-row">
+            <div class="filter-group">
+                <label for="stadiumName">Stadium:</label>
+                <input type="text" name="stadiumName" id="stadiumName" value="">
+            </div>
+
+            <div class="filter-group">
+                <label for="matchPeriod">Match Period:</label>
+                <select name="matchPeriod" id="matchPeriod">
+                    <option value="" selected="selected">-- Any --</option>
+                    <option value="MORNING">Morning</option>
+                    <option value="AFTERNOON">Afternoon</option>
+                    <option value="NIGHT">Night</option>
+                </select>
+            </div>
+
+            <div class="filter-group button-group">
+                <button class="nav-button" type="submit">Filter</button>
+                <a href="/matches" class="nav-button">Clear</a>
+            </div>
+        </div>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Team 1</th>
+                <th>Team 2</th>
+                <th>Score</th>
+                <th>Stadium</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Finished</th>
+                <th>Tournament</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="match, iter : ${matches}">
+                <td th:text="${match.team1}"></td>
+                <td th:text="${match.team2}"></td>
+                <td th:text="${match.score}"></td>
+                <td th:text="${match.stadium}"></td>
+                <td th:text="${match.date}"></td>
+                <td th:text="${match.time}"></td>
+                <td th:text="${match.over} ? 'Yes' : 'No'"></td>
+                <td th:text="${match.tournament != null} ? ${match.tournament} : 'No Tournament'"></td>
+                <td>
+                    <form th:action="@{/matches/details}" method="get">
+                        <input type="hidden" name="matchId" th:value="${match.id}" />
+                        <button type="submit" class="small-button">View</button>
+                    </form>
+                </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(matches)}">
+                <td colspan="9">No matches found.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <footer>
+        <p>&copy; 2025 - Match Management</p>
+    </footer>
+</body>
+</html>

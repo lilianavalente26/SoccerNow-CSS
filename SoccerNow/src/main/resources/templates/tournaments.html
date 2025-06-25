@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tournaments</title>
+    <link rel="stylesheet" href="/css/tournaments.css">
+</head>
+<body>
+    <header>
+        <h1>Tournaments</h1>
+        <nav>
+            <a href="/" class="nav-button">Home</a>
+        </nav>
+    </header>
+
+    <form th:action="@{/tournaments/filter-by/result}" method="get" id="filterForm">
+        <div class="filter-row">
+            <div class="filter-group">
+                <label for="name">Tournament Name:</label>
+                <input type="text" id="name" name="name" th:value="${param.name}">
+            </div>
+
+            <div class="filter-group">
+                <label for="clubName">Club Name:</label>
+                <input type="text" id="clubName" name="clubName" th:value="${param.clubName}">
+            </div>
+        </div>
+
+        <div class="filter-row">
+            <div class="filter-group">
+                <label for="minRealizedMatches">Min Played Matches:</label>
+                <input type="number" id="minRealizedMatches" name="minRealizedMatches" min="0" th:value="${param.minRealizedMatches}">
+            </div>
+
+            <div class="filter-group">
+                <label for="maxRealizedMatches">Max Played Matches:</label>
+                <input type="number" id="maxRealizedMatches" name="maxRealizedMatches" min="0" th:value="${param.maxRealizedMatches}">
+            </div>
+        </div>
+
+        <div class="filter-row">
+            <div class="filter-group">
+                <label for="minToDoMatches">Min Scheduled Matches:</label>
+                <input type="number" id="minToDoMatches" name="minToDoMatches" min="0" th:value="${param.minToDoMatches}">
+            </div>
+
+            <div class="filter-group">
+                <label for="maxToDoMatches">Max Scheduled Matches:</label>
+                <input type="number" id="maxToDoMatches" name="maxToDoMatches" min="0" th:value="${param.maxToDoMatches}">
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button type="submit" class="nav-button">Filter</button>
+            <a th:href="@{/tournaments}" class="nav-button">Clear</a>
+        </div>
+    </form>
+
+    <table class="main-table">
+        <thead>
+            <tr>
+                <th>Tournament</th>
+                <th>Matches</th>
+                <th>Standings</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="tournament : ${tournaments}">
+                <td th:text="${tournament.tournamentName}"></td>
+                <td>
+                    <div class="clean-list" th:if="${not #lists.isEmpty(tournament.matches)}">
+                        <div th:each="match : ${tournament.matches}" th:text="${match}"></div>
+                    </div>
+                    <span th:if="${#lists.isEmpty(tournament.matches)}">No matches</span>
+                </td>
+                <td>
+                    <table class="standings-table" th:if="${not #maps.isEmpty(tournament.standings)}">
+                        <thead>
+                            <tr>
+                                <th>Team</th>
+                                <th>Pts</th>
+                                <th>GS</th>
+                                <th>GC</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="entry : ${tournament.standings.entrySet()}">
+                                <td th:text="${entry.key}"></td>
+                                <td th:text="${entry.value.get(0)}"></td>
+                                <td th:text="${entry.value.get(1)}"></td>
+                                <td th:text="${entry.value.get(2)}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <span th:if="${#maps.isEmpty(tournament.standings)}">No standings</span>
+                </td>
+                <td th:text="${tournament.over ? 'Finished' : 'In Progress'}"></td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(tournaments)}">
+                <td colspan="4">No tournaments found</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

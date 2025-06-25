@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Clubs</title>
+    <link rel="stylesheet" href="/css/clubs.css" />
+</head>
+<body>
+    <header>
+        <h1>Clubs</h1>
+        <nav>
+            <a href="/" class="nav-button">Home</a>
+        </nav>
+    </header>
+
+    <form action="#" th:action="@{/clubs/filter-by/result}" method="get" id="filterForm">
+        <div class="filter-group">
+            <label for="name">Club Name:</label>
+            <input type="text" id="name" name="name" th:value="${param.name}" />
+        </div>
+
+        <div class="filter-group">
+            <label for="minPlayers">Minimum number of players:</label>
+            <input type="number" id="minPlayers" name="minPlayers" min="0" th:value="${param.minPlayers}" />
+        </div>
+
+        <div class="filter-group">
+            <label for="maxPlayers">Maximum number of players:</label>
+            <input type="number" id="maxPlayers" name="maxPlayers" min="0" th:value="${param.maxPlayers}" />
+        </div>
+
+        <div class="filter-group">
+            <label for="nWins">Number of wins:</label>
+            <input type="number" id="nWins" name="nWins" min="0" th:value="${param.nWins}" />
+        </div>
+
+        <div class="filter-group">
+            <label for="nDraws">Number of draws:</label>
+            <input type="number" id="nDraws" name="nDraws" min="0" th:value="${param.nDraws}" />
+        </div>
+
+        <div class="filter-group">
+            <label for="nLosses">Number of losses:</label>
+            <input type="number" id="nLosses" name="nLosses" min="0" th:value="${param.nLosses}" />
+        </div>
+
+        <div class="filter-group">
+            <label for="nAchievements">Number of achievements:</label>
+            <input type="number" id="nAchievements" name="nAchievements" min="0" th:value="${param.nAchievements}" />
+        </div>
+
+        <div class="filter-group">
+            <label for="achievementPosition">Achievement position:</label>
+            <input type="number" id="achievementPosition" name="achievementPosition" min="0" th:value="${param.achievementPosition}" />
+        </div>
+
+        <div class="filter-group">
+            <label for="missingPlayerPosition">Missing player position:</label>
+            <select id="missingPlayerPosition" name="missingPlayerPosition">
+                <option value="">-- Any --</option>
+                <option value="GOALKEEPER" th:selected="${param.missingPlayerPosition == 'GOALKEEPER'}">Goalkeeper</option>
+                <option value="DEFENDER" th:selected="${param.missingPlayerPosition == 'DEFENDER'}">Defender</option>
+                <option value="MIDFIELDER" th:selected="${param.missingPlayerPosition == 'MIDFIELDER'}">Midfielder</option>
+                <option value="FORWARD" th:selected="${param.missingPlayerPosition == 'FORWARD'}">Forward</option>
+            </select>
+        </div>
+
+        <div class="button-group">
+            <button type="submit">Filter</button>
+            <a th:href="@{/clubs}"><button type="button">Clear</button></a>
+        </div>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Number of Teams</th>
+                <th>Tournaments</th>
+                <th>Achievements</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="club, iter : ${clubs}">
+                <td th:text="${club.name}"></td>
+                <td th:text="${club.teams}"></td>
+                <td th:text="${#lists.isEmpty(club.tournaments) ? 'No tournaments' : #strings.arrayJoin(club.tournaments, ', ')}"></td>
+                <td th:text="${#lists.isEmpty(club.achievements) ? 'No achievements' : #strings.arrayJoin(club.achievements, ', ')}"></td>
+                <td>
+                    <form th:action="@{/clubs/teams}" method="get">
+                        <input type="hidden" name="clubId" th:value="${club.clubId}" />
+                        <button type="submit">View Details</button>
+                    </form>
+                </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(clubs)}">
+                <td colspan="5">No clubs found.</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

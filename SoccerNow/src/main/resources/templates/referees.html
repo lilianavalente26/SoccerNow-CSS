@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Árbitros</title>
+    <link rel="stylesheet" href="/css/referees.css">
+    <script>
+        function toggleInputs() {
+            const type = document.getElementById("type").value;
+            document.getElementById("nameInput").style.display = type === "name" ? "block" : "none";
+            document.getElementById("minMaxInput").style.display = type === "name" ? "none" : "block";
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Referees List</h1>
+        <nav>
+            <a href="/" class="nav-button">Home</a>
+        </nav>
+    </header>
+
+    <form action="/referees/filter-by/result" method="get" id="filterForm">
+        <div class="filter-row">
+            <div class="filter-group">
+                <label for="type">Filter By:</label>
+                <select name="type" id="type" onchange="toggleInputs()">
+                    <option value="name">Name</option>
+                    <option value="matches-oficialized">Matches oficialized</option>
+                    <option value="cards-shown">Cards showed</option>
+                </select>
+            </div>
+
+            <div class="filter-group" id="nameInput">
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="name" th:value="${param.name}">
+            </div>
+
+            <div class="filter-group" id="minMaxInput" style="display: none">
+                <div class="min-max-container">
+                    <div>
+                        <label for="min">Min:</label>
+                        <input type="number" name="min" id="min" min="0" th:value="${param.min}">
+                    </div>
+                    <div>
+                        <label for="max">Max:</label>
+                        <input type="number" name="max" id="max" min="0" th:value="${param.max}">
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-group button-group">
+                <button type="submit" class="nav-button">Filter</button>
+                <a href="/referees" class="nav-button">Clean</a>
+            </div>
+        </div>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Certificate</th>
+				<th>Matches</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="referee : ${referees}">
+                <td th:text="${referee.name}">Nome</td>
+                <td th:text="${referee.hasCertificate} ? 'Yes' : 'No'">Certificado</td>
+				<td th:text="${#strings.arrayJoin(referee.matches, ', ')}">Teams</td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(referees)}">
+                <td colspan="3">No referees found</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <footer>
+        <p>&copy; 2025 - Referee Management</p>
+    </footer>
+</body>
+</html>

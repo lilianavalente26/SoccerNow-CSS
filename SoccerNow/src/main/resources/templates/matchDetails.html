@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Match Details</title>
+    <link rel="stylesheet" href="/css/match-details.css" />
+</head>
+<body>
+    <header>
+        <h1>Match Details</h1>
+        <nav>
+            <a href="/matches" class="nav-button">Back to Matches</a>
+        </nav>
+    </header>
+
+    <div class="match-info">
+        <div class="team-info">
+            <h2 th:text="${match.team1}"></h2>
+            <p class="score" th:text="${match.score}"></p>
+            <h2 th:text="${match.team2}"></h2>
+        </div>
+
+        <div class="match-details">
+            <p><strong>Stadium:</strong> <span th:text="${match.stadium}"/></p>
+            <p><strong>Date:</strong> <span th:text="${match.date}"/></p>
+            <p><strong>Time:</strong> <span th:text="${match.time}"/></p>
+            <p><strong>Status:</strong> <span th:text="${match.over} ? 'Finished' : 'In Progress'"/></p>
+            <p><strong>Tournament:</strong> <span th:text="${match.tournament != null} ? ${match.tournament} : 'No Tournament'"/></p>
+            <p><strong>Main Referee:</strong> <span th:text="${match.principalReferee}"/></p>
+        </div>
+    </div>
+
+    <div class="sections-container">
+        <div class="section">
+            <h3>Assistant Referees</h3>
+            <ul>
+                <li th:each="referee : ${match.referees}" th:text="${referee}"></li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>Goals</h3>
+            <ul>
+                <li th:each="g : ${match.goals}" th:text="${g}"></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="sections-container">
+        <div class="section">
+            <h3>Team 1 Cards</h3>
+            <h4>Yellow Cards</h4>
+            <ul>
+                <li th:each="y : ${match.team1_yellowCards}" th:text="${y}"></li>
+            </ul>
+            <h4>Red Cards</h4>
+            <ul>
+                <li th:each="r : ${match.team1_redCards}" th:text="${r}"></li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>Team 2 Cards</h3>
+            <h4>Yellow Cards</h4>
+            <ul>
+                <li th:each="y : ${match.team2_yellowCards}" th:text="${y}"></li>
+            </ul>
+            <h4>Red Cards</h4>
+            <ul>
+                <li th:each="r : ${match.team2_redCards}" th:text="${r}"></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="event-form">
+        <h2>Register Event</h2>
+        <form id="eventForm">
+            <div class="form-group">
+                <label for="playerId">Player:</label>
+                <select name="playerId" id="playerId">
+                    <option th:each="entry : ${match.players.entrySet()}"
+                            th:value="${entry.key}"
+                            th:text="${entry.value}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="action">Action:</label>
+                <select name="action" id="action">
+                    <option value="goal">Goal</option>
+                    <option value="yellow">Yellow Card</option>
+                    <option value="red">Red Card</option>
+                </select>
+            </div>
+
+            <button type="submit" class="action-button">Register</button>
+        </form>
+    </div>
+
+    <div class="finish-match">
+        <button id="finishMatchBtn" class="action-button">Finish Match</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 - Match Management</p>
+    </footer>
+
+    <script th:inline="javascript">
+        const matchId = [[${match.id}]];
+
+        document.querySelector("#eventForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const playerId = document.querySelector("[name='playerId']").value;
+            const action = document.querySelector("[name='action']").value;
+
+            let endpoint = "";
+            if (action === "goal") {
+                endpoint = `/match/${matchId}/register/goal/player/${playerId}`;
+            } else if (action === "yellow") {
+                endpoint = `/match/${matchId}/register/player/${playerId}/card/yellowCard`;
+            } else if (action === "red") {
+                endpoint = `/match/${matchId}/register/player/${playerId}/card/redCard`;
+            }
+
+            fetch(endpoint, {
+                method: "PUT"
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data);
+                window.location.reload();
+            })
+            .catch(err => alert("Failed to register: " + err.message));
+        });
+
+        document.querySelector("#finishMatchBtn").addEventListener("click", function() {
+            if (!confirm("Are you sure you want to finish the match?")) return;
+
+            const endpoint = `/match/${matchId}/setStateAsFinished`;
+
+            fetch(endpoint, {
+                method: "PUT"
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data);
+                window.location.reload();
+            })
+            .catch(err => alert("Failed to finish the match: " + err.message));
+        });
+    </script>
+</body>
+</html>

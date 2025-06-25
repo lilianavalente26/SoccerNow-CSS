@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane fx:id="playerAreaPane" fx:controller="pt.ul.fc.css.soccernow.presentation.control.player.PlayerAreaController" xmlns:fx="http://javafx.com/fxml/1">
+    <ScrollPane fitToWidth="true" fitToHeight="true" pannable="true">
+        <VBox spacing="15" alignment="CENTER" style="-fx-padding: 30;">
+            <Label text="This is the Player Area, you can register players and edit/remove them!" style="-fx-font-size: 16;"/>
+
+            <Button text="Register Player" onAction="#registerPlayer" maxWidth="200"/>
+
+            <HBox spacing="10" alignment="CENTER">
+                <Label text="Player ID:"/>
+                <TextField fx:id="playerIdField" promptText="Enter player ID" maxWidth="200"/>
+                <Button text="Search" onAction="#searchPlayer" maxWidth="100"/>
+            </HBox>
+
+            <Label fx:id="successLabel" style="-fx-text-fill: green;" visible="false"/>
+            <Label fx:id="errorLabel" style="-fx-text-fill: red;" visible="false"/>
+
+            <Button text="Back to Menu" onAction="#backToMenu" maxWidth="200"/>
+        </VBox>
+    </ScrollPane>
+</StackPane>

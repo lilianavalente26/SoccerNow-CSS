@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Players</title>
+    <link rel="stylesheet" href="/css/players.css" />
+    <script>
+        function updateFields() {
+            const type = document.getElementById('type').value;
+            document.getElementById('nameField').style.display = (type === 'name') ? 'block' : 'none';
+            document.getElementById('positionField').style.display = (type === 'position') ? 'block' : 'none';
+            document.getElementById('rangeFields').style.display = (['goals', 'cards', 'games'].includes(type)) ? 'flex' : 'none';
+        }
+        window.onload = updateFields;
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Player List</h1>
+        <nav>
+            <a href="/" class="nav-button">Home</a>
+        </nav>
+    </header>
+
+    <form th:action="@{/players/filter-by/result}" method="get" id="filterForm">
+        <div class="filter-row">
+            <div class="filter-group">
+                <label for="type">Filter by:</label>
+                <select id="type" name="type" onchange="updateFields()">
+                    <option value="">-- Select --</option>
+                    <option value="name" th:selected="${param.type == 'name'}">Name</option>
+                    <option value="position" th:selected="${param.type == 'position'}">Position</option>
+                    <option value="goals" th:selected="${param.type == 'goals'}">Goals</option>
+                    <option value="cards" th:selected="${param.type == 'cards'}">Cards</option>
+                    <option value="games" th:selected="${param.type == 'games'}">Games</option>
+                </select>
+            </div>
+
+            <div class="filter-group" id="nameField">
+                <label for="name">Player name:</label>
+                <input type="text" name="name" id="name" placeholder="Enter name" th:value="${param.name}" />
+            </div>
+            
+            <div class="filter-group" id="positionField">
+                <label for="position">Position:</label>
+                <select name="position" id="position" th:value="${param.position}">
+                    <option value="Goalkeeper">Goalkeeper</option>
+                    <option value="Defender">Defender</option>
+                    <option value="Midfielder">Midfielder</option>
+                    <option value="Forward">Forward</option>
+                </select>
+            </div>
+
+            <div class="filter-group" id="rangeFields">
+                <div class="min-max-container">
+                    <div>
+                        <label for="min">Min:</label>
+                        <input type="number" name="min" id="min" placeholder="Min" th:value="${param.min}" />
+                    </div>
+                    <div>
+                        <label for="max">Max:</label>
+                        <input type="number" name="max" id="max" placeholder="Max" th:value="${param.max}" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-group button-group">
+                <button class="nav-button" type="submit">Filter</button>
+                <a th:href="@{/players}" class="nav-button">Clear</a>
+            </div>
+        </div>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Teams</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="player : ${players}">
+                <td th:text="${player.name}">Name</td>
+                <td th:text="${player.preferedPosition}">Position</td>
+                <td th:text="${#strings.arrayJoin(player.teams, ', ')}">Teams</td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(players)}">
+                <td colspan="3">No players found</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <footer>
+        <p>&copy; 2025 - Player Management</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane fx:id="menuPane" fx:controller="pt.ul.fc.css.soccernow.presentation.control.menu.MenuController" xmlns:fx="http://javafx.com/fxml/1">
+    <ScrollPane fitToWidth="true" fitToHeight="true" pannable="true">
+        <VBox spacing="20" alignment="CENTER" style="-fx-padding: 30;" prefWidth="600" prefHeight="400">
+            <Label text="Welcome to Soccer Now" style="-fx-font-size: 20; -fx-font-weight: bold;"/>
+
+            <Button text="Player Area" onAction="#playerAreaOpen"/>
+            <Button text="Referee Area" onAction="#refereeAreaOpen"/>
+            <Button text="Club Area" onAction="#clubAreaOpen"/>
+            <Button text="Match Area" onAction="#matchAreaOpen"/>
+            <Button text="Tournament Area" onAction="#tournamentAreaOpen"/>
+            <Button text="Logout" onAction="#logout"/>
+        </VBox>
+    </ScrollPane>
+</StackPane>

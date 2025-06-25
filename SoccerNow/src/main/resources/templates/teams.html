@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Club Teams</title>
+    <link rel="stylesheet" href="/css/teams.css">
+</head>
+<body>
+    <header>
+        <h1>Club Teams</h1>
+        <a href="/clubs" class="back-link">Back to Clubs</a>
+    </header>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Club</th>
+                <th>Goalkeeper</th>
+                <th>Players</th>
+                <th>Matches</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="team : ${teams}">
+                <td th:text="${team.club}"></td>
+                <td th:text="${team.goalkeeper != null ? team.goalkeeper : 'No GK'}"></td>
+                <td th:text="${#lists.isEmpty(team.players) ? 'No players' : #strings.arrayJoin(team.players, ', ')}"></td>
+                <td th:text="${#lists.isEmpty(team.matches) ? 'No matches' : #strings.arrayJoin(team.matches, ', ')}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SoccerNow</title>
+  <link rel="stylesheet" th:href="@{/css/home.css}">
+</head>
+<body>
+  <header>
+    <h1 th:text="'Welcome to SoccerNow: ' + ${username}"></h1>
+    <p class="subtitle">Your complete platform for managing players, matches and football clubs</p>
+  </header>
+  
+  <main>
+    <nav>
+      <a th:href="@{/players}" class="nav-button">Players</a>
+      <a th:href="@{/referees}" class="nav-button">Referees</a>
+      <a th:href="@{/matches}" class="nav-button">Matches</a>
+      <a th:href="@{/clubs}" class="nav-button">Clubs</a>
+	  <a th:href="@{/tournaments}" class="nav-button">Tournaments</a>
+    </nav>
+    
+    <a th:href="@{/logout}" class="logout-link">Log Out</a>
+  </main>
+  
+  <footer>
+    <p>© 2025 SoccerNow - All rights reserved</p>
+  </footer>
+</body>
+</html>

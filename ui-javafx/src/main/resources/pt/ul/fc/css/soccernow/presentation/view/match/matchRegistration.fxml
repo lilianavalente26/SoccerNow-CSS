@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane fitToWidth="true" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="pt.ul.fc.css.soccernow.presentation.control.match.MatchRegistrationController">
+    <content>
+        <VBox spacing="20" alignment="CENTER" style="-fx-padding: 30;">
+            <Label text="Register New Match" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+
+            <GridPane hgap="10" vgap="10">
+                <Label text="Team 1 ID:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <TextField fx:id="team1Field" promptText="Enter team ID" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                <Label fx:id="team1Error" style="-fx-text-fill: red;" visible="false" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                <Label text="Team 2 ID:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <TextField fx:id="team2Field" promptText="Enter team ID" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                <Label fx:id="team2Error" style="-fx-text-fill: red;" visible="false" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                <Label text="Principal Referee ID:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                <TextField fx:id="refereeField" promptText="Enter referee ID" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                <Label fx:id="refereeError" style="-fx-text-fill: red;" visible="false" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+                <Label text="Additional Referees:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                <TextField fx:id="refereeListField" promptText="Comma-separated (ID,ID,...)" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+                <Label fx:id="refereeListError" style="-fx-text-fill: red;" visible="false" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+
+                <Label text="Date (YYYY-MM-DD):" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+                <TextField fx:id="dateField" promptText="e.g. 2023-12-31" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
+                <Label fx:id="dateError" style="-fx-text-fill: red;" visible="false" GridPane.rowIndex="9" GridPane.columnIndex="1"/>
+
+                <Label text="Time (HH:MM):" GridPane.rowIndex="10" GridPane.columnIndex="0"/>
+                <TextField fx:id="timeField" promptText="e.g. 14:30" GridPane.rowIndex="10" GridPane.columnIndex="1"/>
+                <Label fx:id="timeError" style="-fx-text-fill: red;" visible="false" GridPane.rowIndex="11" GridPane.columnIndex="1"/>
+
+                <Label text="Stadium ID:" GridPane.rowIndex="12" GridPane.columnIndex="0"/>
+                <TextField fx:id="stadiumField" promptText="Enter stadium ID" GridPane.rowIndex="12" GridPane.columnIndex="1"/>
+                <Label fx:id="stadiumError" style="-fx-text-fill: red;" visible="false" GridPane.rowIndex="13" GridPane.columnIndex="1"/>
+
+                <Label text="Tournament ID (optional):" GridPane.rowIndex="14" GridPane.columnIndex="0"/>
+                <TextField fx:id="tournamentField" promptText="Enter tournament ID" GridPane.rowIndex="14" GridPane.columnIndex="1"/>
+                <Label fx:id="tournamentError" style="-fx-text-fill: red;" visible="false" GridPane.rowIndex="15" GridPane.columnIndex="1"/>
+            </GridPane>
+
+            <Label fx:id="generalError" style="-fx-text-fill: red;" visible="false" />
+
+            <HBox spacing="10" alignment="CENTER">
+                <Button text="Register" onAction="#registerMatch" style="-fx-font-weight: bold;" />
+                <Button text="Cancel" onAction="#cancelRegistration" />
+            </HBox>
+        </VBox>
+    </content>
+</ScrollPane>

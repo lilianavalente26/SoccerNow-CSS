@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="pt.ul.fc.css.soccernow.presentation.control.player.PlayerEditController">
+
+    <ScrollPane fitToWidth="true" fitToHeight="true" pannable="true">
+        <VBox spacing="15" alignment="CENTER" style="-fx-padding: 30;">
+            <Label text="Edit Player" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+
+            <GridPane hgap="10" vgap="10" alignment="CENTER">
+                <Label text="ID:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <TextField fx:id="idField" editable="false" style="-fx-background-color: #f5f5f5; -fx-opacity: 1; -fx-text-fill: black;" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                <Label text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <TextField fx:id="nameField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                <Label fx:id="nameError" text="Name is required" style="-fx-text-fill: red;" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+                <Label text="Position:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                <ComboBox fx:id="positionComboBox" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+                <Label text="Team IDs (comma separated):" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                <TextField fx:id="teamsField" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                <Label fx:id="teamsError" text="" style="-fx-text-fill: red;" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+            </GridPane>
+
+            <HBox spacing="10" alignment="CENTER">
+                <Button text="Save Changes" onAction="#saveChanges" style="-fx-font-weight: bold;"/>
+                <Button text="DELETE PLAYER" onAction="#deletePlayer" style="-fx-text-fill: red; -fx-font-weight: bold;"/>
+            </HBox>
+
+            <Button text="Cancel" onAction="#cancelChanges" style="-fx-font-weight: bold;"/>
+        </VBox>
+    </ScrollPane>
+</StackPane>

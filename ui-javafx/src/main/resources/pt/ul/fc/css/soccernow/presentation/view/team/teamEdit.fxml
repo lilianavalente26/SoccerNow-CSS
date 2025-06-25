@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/8" 
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="pt.ul.fc.css.soccernow.presentation.control.team.TeamEditController"
+      spacing="10" 
+      alignment="CENTER"
+      style="-fx-padding: 20;">
+    
+    <Label text="Edit Team" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+    
+    <GridPane hgap="10" vgap="10">
+        <Label text="Team ID:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <TextField fx:id="idField" editable="false" style="-fx-background-color: #f5f5f5; -fx-opacity: 1; -fx-text-fill: black;"
+                   GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+        
+        <Label text="Club ID:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <TextField fx:id="clubIdField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+        <Label fx:id="clubIdError" text="Club ID is required" style="-fx-text-fill: red;" visible="false" 
+               GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+        
+        <Label text="Player IDs (comma separated):" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <TextField fx:id="playersField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+        <Label fx:id="playersError" text="" style="-fx-text-fill: red;" visible="false" 
+               GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+        
+        <Label text="Goalkeeper ID:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+        <TextField fx:id="goalkeeperField" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+        <Label fx:id="goalkeeperError" text="" style="-fx-text-fill: red;" visible="false" 
+               GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+    </GridPane>
+    
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Save Changes" onAction="#saveChanges" style="-fx-font-weight: bold;"/>
+        <Button text="DELETE TEAM" onAction="#deleteTeam" style="-fx-text-fill: red; -fx-font-weight: bold;"/>
+    </HBox>
+    
+    <Button text="Cancel" onAction="#cancelChanges" style="-fx-font-weight: bold;"/>
+</VBox>

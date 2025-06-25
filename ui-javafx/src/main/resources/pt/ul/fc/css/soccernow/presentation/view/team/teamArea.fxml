@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane fx:id="teamAreaPane" fx:controller="pt.ul.fc.css.soccernow.presentation.control.team.TeamAreaController" xmlns:fx="http://javafx.com/fxml/1">
+    <VBox xmlns:fx="http://javafx.com/fxml" spacing="15" alignment="CENTER">
+
+        <Label text="Team Management Area - Register, Edit and Remove Teams!"/>
+
+        <Button text="Register New Team" onAction="#registerTeam"/>
+        
+        <HBox spacing="10" alignment="CENTER">
+            <Label text="Team ID:"/>
+            <TextField fx:id="teamIdField" promptText="Enter team ID"/>
+            <Button text="Search" onAction="#searchTeam"/>
+        </HBox>
+        
+        <Label fx:id="successLabel" style="-fx-text-fill: green;" visible="false"/>
+        <Label fx:id="errorLabel" style="-fx-text-fill: red;" visible="false"/>
+        
+        <Button text="Back to Club Area" onAction="#backToClubArea"/>
+        
+    </VBox>
+</StackPane>

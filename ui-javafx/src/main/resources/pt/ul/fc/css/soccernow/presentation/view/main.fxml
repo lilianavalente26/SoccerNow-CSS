@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane fx:id="rootPane" fx:controller="pt.ul.fc.css.soccernow.presentation.control.MainController"
+           xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx/8">
+
+    <ScrollPane fitToWidth="true" fitToHeight="true" pannable="true">
+        <VBox spacing="20" alignment="CENTER" style="-fx-padding: 30;" prefWidth="600" prefHeight="400">
+        </VBox>
+    </ScrollPane>
+</StackPane>
